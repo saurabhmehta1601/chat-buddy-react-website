@@ -1,6 +1,7 @@
 const express = require("express");
 const { default: helmet } = require("helmet");
 const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -11,30 +12,37 @@ app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
 
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
 app.get("/", function (req, res) {
   return res.status(200).json({ message: "Hello from OPENAI chat bot" });
 });
 
-app.get("/get-completion", async function getCompletion(req, res) {
-  const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
+app.post("/get-completion", async function getCompletion(req, res) {
+  try {
+    const { prompt } = req.body;
 
-  const { prompt } = req.body;
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt,
+      temperature: 0.2,
+      max_tokens: 1000,
+      presence_penalty: 0.1,
+      frequency_penalty: 0.1,
+    });
 
-  const openai = new OpenAIApi(configuration);
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt,
-    temperature: 0.2,
-    max_tokens: 1000,
-    presence_penalty: 0.1,
-    frequency_penalty: 0.1,
-  });
-  return;
+    const topChoice = response.data.choices[0];
+    return res.status(200).json({ autoComplete: topChoice.text });
+  } catch (error) {
+    console.table(error);
+    return res.status(500).json({ error: { message: error.message } });
+  }
 });
 
 var PORT = process.env.PORT || 8000;
 app.listen(PORT, function () {
-  console.log(">Express app is running at PORT " + PORT);
+  console.log("> Express app is running at PORT " + PORT);
 });
