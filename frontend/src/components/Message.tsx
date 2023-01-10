@@ -40,9 +40,11 @@ const Message = (props: propTypes) => {
                         />
                     </div> :
 
-                    props.sender === "bot" ?
-                        renderedText :
-                        `${props.text}`
+
+
+                    <p style={{ whiteSpace: 'pre-line' }}>
+                        {props.sender === "bot" ? renderedText : props.text}
+                    </p>
                 }
             </div>
         </article>

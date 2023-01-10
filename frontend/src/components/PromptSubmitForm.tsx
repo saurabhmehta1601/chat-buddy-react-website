@@ -17,6 +17,7 @@ const PromptSubmitForm = (props: IProps) => {
                 value={props.prompt}
                 onChange={(e) => props.setPrompt(e.target.value)}
                 className="w-full outline-none p-2 bg-transparent "
+                autoComplete='off'
             />
             <button
                 className="p-2"
