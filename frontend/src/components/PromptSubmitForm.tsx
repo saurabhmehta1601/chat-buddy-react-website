@@ -10,7 +10,8 @@ const PromptSubmitForm = (props: IProps) => {
     return (
         <form
             onSubmit={(e) => props.onSubmit(e)}
-            action="" className="flex bg-white rounded-md w-full">
+            action=""
+            className="flex bg-white rounded-md w-full ring ">
             <input
                 type="text"
                 name="prompt"
@@ -20,7 +21,7 @@ const PromptSubmitForm = (props: IProps) => {
                 autoComplete='off'
             />
             <button
-                className="p-2"
+                className="p-2 "
                 type='submit'
                 name="submit"
             >
