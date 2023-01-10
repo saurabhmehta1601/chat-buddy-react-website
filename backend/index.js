@@ -8,11 +8,7 @@ const uuid = require("uuid");
 
 require("dotenv").config();
 
-app.use(
-  cors({
-    origin: "https://openai-codex-chat-ca8aymfww-saurabhmehta1601.vercel.app/",
-  })
-);
+app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
