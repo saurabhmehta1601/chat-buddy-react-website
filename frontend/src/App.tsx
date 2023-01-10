@@ -15,7 +15,7 @@ interface IMessage {
 function App() {
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([
-    { id: "1", sender: "bot", text: "Hi how can I help you ? ", loading: false },
+    { id: "1", sender: "bot", text: "\n\nHi how can I \n \n\nhelp you ? ", loading: false },
   ])
 
   const handlePromptSubmission = async (e: React.FormEvent) => {
@@ -42,7 +42,7 @@ function App() {
       setMessages(messages => [...messages.filter(msg => msg.id !== botCompletionLoadingMessageId), { id, sender: "bot", text: autoComplete, loading: false }])
 
     } catch (error) {
-
+      setMessages([...messages.filter(message => message.loading === false)])
     }
 
   }

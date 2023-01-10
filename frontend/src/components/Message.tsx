@@ -1,9 +1,27 @@
-import React, { ComponentPropsWithoutRef } from 'react'
+import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react'
 import ReactLoading from 'react-loading';
+import { useInterval } from "usehooks-ts"
 
 type propTypes = ComponentPropsWithoutRef<"header"> & { text: string, sender: "bot" | "user", loading: boolean }
 
 const Message = (props: propTypes) => {
+    const [renderedText, setRenderedText] = useState('')
+    const [cursor, setCursor] = useState(0)
+
+    useInterval(() => {
+        if (cursor >= props.text.length) {
+            return
+        }
+        // if (props.text.substring(cursor).startsWith("\n")) {
+        //     setRenderedText(text => text + "\n")
+        //     setCursor(cursor => cursor + 2)
+        // }
+        // else {
+        setRenderedText(text => text + props.text[cursor])
+        setCursor(cursor => cursor + 1)
+        // }
+    }, cursor >= props.text.length || props.loading || props.sender !== "bot" ? null : 40)
+
     return (
         <article className='flex items-start gap-x-4 p-2 rounded-md'>
             <img
@@ -20,7 +38,12 @@ const Message = (props: propTypes) => {
                             height={32}
                             className="self-center relative -top-3"
                         />
-                    </div> : props.text}
+                    </div> :
+
+                    props.sender === "bot" ?
+                        renderedText :
+                        `${props.text}`
+                }
             </div>
         </article>
     )
