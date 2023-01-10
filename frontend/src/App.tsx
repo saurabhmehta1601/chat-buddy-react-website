@@ -9,12 +9,13 @@ interface IMessage {
   id: string
   sender: "bot" | "user"
   text: string
+  loading: boolean
 }
 
 function App() {
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([
-    { id: "1", sender: "bot", text: "Hi how can I help you ? " },
+    { id: "1", sender: "bot", text: "Hi how can I help you ? ", loading: false },
   ])
 
   const handlePromptSubmission = async (e: React.FormEvent) => {
@@ -22,9 +23,14 @@ function App() {
     if (prompt.trim() === "") return
 
     try {
-
       const userMessageId = uuid()
-      setMessages(messages => [...messages, { id: userMessageId, sender: "user", text: prompt }])
+      const userPromptMessage: IMessage = { id: userMessageId, sender: "user", text: prompt, loading: false }
+      setMessages(messages => [...messages, userPromptMessage])
+      const botCompletionLoadingMessageId = uuid()
+
+      const botCompletionLoadingMessage: IMessage = { id: botCompletionLoadingMessageId, sender: "bot", loading: true, text: '' }
+      setMessages(messages => [...messages, botCompletionLoadingMessage])
+
       setPrompt('')
 
       const completionResponse = await axios.post('http://localhost:8000/get-completion', { prompt }, {
@@ -33,7 +39,8 @@ function App() {
         }
       })
       const { id, autoComplete } = completionResponse.data
-      setMessages(messages => [...messages, { id, sender: "bot", text: autoComplete }])
+      setMessages(messages => [...messages.filter(msg => msg.id !== botCompletionLoadingMessageId), { id, sender: "bot", text: autoComplete, loading: false }])
+
     } catch (error) {
 
     }
@@ -42,7 +49,9 @@ function App() {
   return (
     <div className="h-screen max-w-3xl mx-auto flex flex-col ">
       <Header />
-      <ChatSection messages={messages} />
+      <ChatSection
+
+        messages={messages} />
       <PromptSubmitForm
         prompt={prompt}
         setPrompt={setPrompt}
