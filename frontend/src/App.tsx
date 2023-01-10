@@ -39,10 +39,15 @@ function App() {
         }
       })
       const { id, autoComplete } = completionResponse.data
-      setMessages(messages => [...messages.filter(msg => msg.id !== botCompletionLoadingMessageId), { id, sender: "bot", text: autoComplete.trim(), loading: false }])
-
+      setMessages(messages => [
+        ...messages.filter(msg => msg.id !== botCompletionLoadingMessageId),
+        { id, sender: "bot", text: autoComplete.trim(), loading: false }])
     } catch (error) {
-      setMessages([...messages,])
+      const errorMessageId = uuid()
+      setMessages(messages => [
+        ...messages.filter(msg => msg.loading === false),
+        { id: errorMessageId, text: "Sorry I could not get response 😭", sender: "bot", loading: false }
+      ])
     }
 
   }

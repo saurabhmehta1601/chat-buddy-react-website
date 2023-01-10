@@ -5,7 +5,7 @@ const Header = (props: ComponentPropsWithoutRef<"header">) => {
         <header className="p-4 flex justify-between " {...props}>
             <h3 className="text-3xl text-white hover:cursor-pointer">AI BUDDY</h3>
             <span
-                className="hover:cursor-pointer hover:ring active:ring bg-stone-600 rounded-full bg-white">
+                className="hover:cursor-pointer hover:ring active:ring  rounded-full bg-white">
                 <a
                     href="https://github.com/saurabhmehta1601/OPENAI-GPT3-CHAT-BOT"
                 >
