@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
 const { Configuration, OpenAIApi } = require("openai");
+const uuid = require("uuid");
 
 require("dotenv").config();
 
@@ -24,7 +25,6 @@ app.get("/", function (req, res) {
 app.post("/get-completion", async function getCompletion(req, res) {
   try {
     const { prompt } = req.body;
-
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt,
@@ -35,7 +35,10 @@ app.post("/get-completion", async function getCompletion(req, res) {
     });
 
     const topChoice = response.data.choices[0];
-    return res.status(200).json({ autoComplete: topChoice.text });
+    const autoCompleteId = uuid.v4();
+    return res
+      .status(200)
+      .json({ id: autoCompleteId, autoComplete: topChoice.text });
   } catch (error) {
     console.table(error);
     return res.status(500).json({ error: { message: error.message } });
