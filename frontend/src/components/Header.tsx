@@ -7,7 +7,7 @@ const Header = (props: ComponentPropsWithoutRef<"header">) => {
             <span
                 className="hover:cursor-pointer rounded-md bg-stone-600">
                 <a
-                    href="https://github.com/saurabhmehta1601/OPENAI-CODEX-CHAT-BOT"
+                    href="https://github.com/saurabhmehta1601/OPENAI-GPT3-CHAT-BOT"
                 >
                     <img src="/assets/github.png" alt="github" />
                 </a>
