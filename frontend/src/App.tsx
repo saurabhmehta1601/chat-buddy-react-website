@@ -1,16 +1,14 @@
+import Header from "./components/Header"
 
 function App() {
   return (
-    <div className="h-screen max-w-3xl mx-auto">
-      <header className="p-4 flex justify-between ">
-        <h3 className="text-3xl text-white hover:cursor-pointer">CODEX BUDDY</h3>
-        <span className="hover:cursor-pointer rounded-md bg-gray-500">
-          <img src="/assets/github.png" alt="github" />
-        </span>
-      </header>
+    <div className="h-screen max-w-3xl mx-auto flex flex-col bg-purple-600 ">
+      <Header />
 
-      <main className=" max-w-2xl bg-slate-800 rounded-md">
-        <section className="min-h-[200px] p-4 text-white flex">
+      <main
+        className=" max-w-2xl bg-slate-800 rounded-md flex-1 flex flex-col mb-4 self-center w-full"
+      >
+        <section className="min-h-[200px] p-4 text-white flex-1 ">
           <div className="w-full rounded-sm bg-slate-900 flex-1">this is chat section</div>
         </section>
         <form action="" className="flex bg-white rounded-b-md">
