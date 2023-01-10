@@ -33,12 +33,16 @@ const Message = (props: propTypes) => {
                             className="self-center relative -top-3"
                         />
                     </div> :
-                    <p style={{ whiteSpace: 'pre-line' }} className="py-1 px-2 bg-slate-700 rounded-md">
+                    <p style={{ whiteSpace: 'pre-line' }}
+                        className={`
+                    py-1 px-2  rounded-md ${props.sender === "bot" ? "bg-slate-700" : "bg-blue-700"} `
+                        }
+                    >
                         {props.sender === "bot" ? renderedText : props.text}
                     </p>
                 }
             </div>
-        </article>
+        </article >
     )
 }
 
