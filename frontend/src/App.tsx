@@ -33,7 +33,7 @@ function App() {
 
       setPrompt('')
 
-      const completionResponse = await axios.post('http://localhost:8000/get-completion', { prompt }, {
+      const completionResponse = await axios.post('https://ai-buddy-chatgpt-web-app.onrender.com/get-completion', { prompt }, {
         headers: {
           'Content-Type': "application/json"
         }
