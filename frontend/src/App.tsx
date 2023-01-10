@@ -15,8 +15,6 @@ function App() {
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([
     { id: "1", sender: "bot", text: "Hi how can I help you ? " },
-    { id: "2", sender: "user", text: "How can I get job at google " },
-    { id: "3", sender: "bot", text: "This is not so easy , but are you competitive programmer ? If yes it can be helpful since you must be good at data structures and algorithms which is very important" }
   ])
 
   const handlePromptSubmission = async (e: React.FormEvent) => {
@@ -27,6 +25,7 @@ function App() {
 
       const userMessageId = uuid()
       setMessages(messages => [...messages, { id: userMessageId, sender: "user", text: prompt }])
+      setPrompt('')
 
       const completionResponse = await axios.post('http://localhost:8000/get-completion', { prompt }, {
         headers: {
