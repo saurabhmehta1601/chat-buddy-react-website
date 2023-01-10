@@ -12,14 +12,8 @@ const Message = (props: propTypes) => {
         if (cursor >= props.text.length) {
             return
         }
-        // if (props.text.substring(cursor).startsWith("\n")) {
-        //     setRenderedText(text => text + "\n")
-        //     setCursor(cursor => cursor + 2)
-        // }
-        // else {
         setRenderedText(text => text + props.text[cursor])
         setCursor(cursor => cursor + 1)
-        // }
     }, cursor >= props.text.length || props.loading || props.sender !== "bot" ? null : 40)
 
     return (
@@ -29,7 +23,7 @@ const Message = (props: propTypes) => {
                 src={props.sender === "bot" ? "/assets/bot.png" : "/assets/user.png"}
             />
             <div
-                className={" rounded-sm flex-1 " + props.sender === "user" ? "text-right" : "text-left"}>
+                className={" rounded-sm flex-1 "}>
                 {props.loading ?
                     <div className='relative'>
                         <ReactLoading
@@ -39,10 +33,7 @@ const Message = (props: propTypes) => {
                             className="self-center relative -top-3"
                         />
                     </div> :
-
-
-
-                    <p style={{ whiteSpace: 'pre-line' }}>
+                    <p style={{ whiteSpace: 'pre-line' }} className="py-1 px-2 bg-slate-700 rounded-md">
                         {props.sender === "bot" ? renderedText : props.text}
                     </p>
                 }
