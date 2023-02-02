@@ -6,7 +6,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/chat" element={<ChatBot />} />
-
       </Routes>
     </BrowserRouter>
   )
