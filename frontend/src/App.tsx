@@ -1,12 +1,22 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import ChatBot from "./pages/ChatBot"
+import Header from "./components/Header"
+import PageLayout from "./components/PageLayout"
+import ChatBotPage from "./pages/ChatBotPage"
+import CoursesPage from "./pages/CoursesPage"
+import HomePage from "./pages/HomePage"
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/chat" element={<ChatBot />} />
-      </Routes>
+      <PageLayout>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/chat" element={<ChatBotPage />} />
+          <Route path="/courses" element={<CoursesPage />} />
+        </Routes>
+
+      </PageLayout>
     </BrowserRouter>
   )
 }

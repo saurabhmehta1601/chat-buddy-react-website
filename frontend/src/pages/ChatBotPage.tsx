@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import ChatSection from "../components/ChatSection"
-import Header from "../components/Header"
 import PromptSubmitForm from "../components/PromptSubmitForm"
 import axios from "axios"
 import uuid from "react-uuid"
@@ -52,17 +51,15 @@ function ChatBot() {
 
     }
     return (
-        <div className="h-screen max-w-3xl mx-auto flex flex-col ">
-            <Header />
+        <>
             <ChatSection
-
                 messages={messages} />
             <PromptSubmitForm
                 prompt={prompt}
                 setPrompt={setPrompt}
                 onSubmit={handlePromptSubmission}
             />
-        </div>
+        </>
 
     )
 }
