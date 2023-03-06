@@ -13,16 +13,13 @@ AI BUDDY is a web app where you can have chat with a super intelligent AI chat b
 
 - The site is styled with [Tailwindcss](https://tailwindcss.com/) - A utility first CSS framework .
 - The frontend is deployed on [Vercel](https://vercel.com/dashboard) .
+
 ### 2.2 Backend
 
-- It is written in [ Nodejs ](https://nodejs.org/en/) programming language with [ Expressjs ](https://expressjs.com/) - a fast , unopinionated and minimalist web framework .
-- It acts as middlemen between [OpenAI Api](https://openai.com/api/) and frontend .
-- The express backend server communicates with [GPT-3 model text-davinci-003](https://beta.openai.com/docs/models/gpt-3)
-  with the help of [OpenAI Nodejs Library ](https://www.npmjs.com/package/openai) to OpenAI Api .
-
-- The express server provides prompt recieved from frontend to OpenAI Api in request body and in response asks for completion which is then sent back to frontend .
-
-- The backend is deployed on [render](https://render.com/) .
+- It is written in [ Nodejs ](https://nodejs.org/en/) programming language with [AWS Lambda](https://docs.aws.amazon.com/lambda/index.html) - a serverless compute service and [AWS API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) - a service to create web APIs.
+- The resquest sent to `API Gateway` invokes the `Lambda function` which then makes an API call to fetch autocompletion from [OpenAI Api](https://openai.com/api/) and sends the recieved response to frontend .
+- The Lambda function communicates with [GPT-3 model text-davinci-003](https://beta.openai.com/docs/models/gpt-3)
+  with the help of [OpenAI Nodejs SDK ](https://www.npmjs.com/package/openai) to OpenAI Api .
 
 ## 3. Background
 
@@ -37,3 +34,7 @@ It is set of models that can understand and generate natural language . The main
 ### 3.3 GPT-3 model text-davinci-003
 
 It is most capable GPT-3 model. Can do any task the other GTP-3 models can do, often with higher quality, longer output and better instruction-following. Also supports inserting completions within text.
+
+### 3.3 AWS Lambda
+
+AWS Lambda is a compute service that lets you run code without provisioning or managing servers. AWS Lambda executes your code only when needed and scales automatically, from a few requests per day to thousands per second. You pay only for the compute time you consume - there is no charge when your code is not running.
