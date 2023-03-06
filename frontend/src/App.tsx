@@ -13,6 +13,7 @@ interface IMessage {
 }
 
 function App() {
+
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState<IMessage[]>([
     { id: "1", sender: "bot", text: "Hi how can I help you ? ", loading: false },
@@ -33,11 +34,7 @@ function App() {
 
       setPrompt('')
 
-      const completionResponse = await axios.post('https://ai-buddy-chatgpt-web-app.onrender.com/get-completion', { prompt }, {
-        headers: {
-          'Content-Type': "application/json"
-        }
-      })
+      const completionResponse = await axios.post(`${import.meta.env.VITE_BACKEND_SERVER_URI}/get-autocomplete`, { prompt })
       const { id, autoComplete } = completionResponse.data
       setMessages(messages => [
         ...messages.filter(msg => msg.id !== botCompletionLoadingMessageId),
