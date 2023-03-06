@@ -1,5 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
-import {v4 as uuid} from "uuid";
+import { v4 as uuid } from "uuid";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -8,7 +8,8 @@ const openai = new OpenAIApi(configuration);
 
 export async function handler(event) {
   try {
-    if (!event.prompt) {
+    const { prompt } = JSON.parse(event.body);
+    if (!prompt) {
       return {
         statusCode: 400,
         body: JSON.stringify({ error: { message: "No prompt provided" } }),
@@ -16,7 +17,7 @@ export async function handler(event) {
     }
     const autoCompleteResponse = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: event.prompt,
+      prompt: prompt,
       temperature: 0.2,
       max_tokens: 1000,
       presence_penalty: 0.1,
