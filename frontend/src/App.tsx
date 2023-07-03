@@ -34,8 +34,8 @@ function App() {
 
       setPrompt('')
 
-      const completionResponse = await axios.post(`${import.meta.env.VITE_BACKEND_SERVER_URI}/get-autocomplete`, { prompt })
-      const { id, autoComplete } = completionResponse.data
+      const completionResponse = await axios.post(`${import.meta.env.VITE_BACKEND_SERVER_URI}/autocomplete`, { prompt })
+      const { id, text: autoComplete } = completionResponse.data
       setMessages(messages => [
         ...messages.filter(msg => msg.id !== botCompletionLoadingMessageId),
         { id, sender: "bot", text: autoComplete.trim(), loading: false }])
