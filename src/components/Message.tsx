@@ -24,7 +24,7 @@ const Message = (props: propTypes) => {
             </Box>
             <Box flex={1}>
                 {props.loading ?
-                    <Box className='relative'>
+                    <Box position='relative'>
                         <ReactLoading
                             type={"bubbles"}
                             color={colors.grey['300']}
