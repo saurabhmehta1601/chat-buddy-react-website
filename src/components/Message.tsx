@@ -1,7 +1,9 @@
-import React, { ComponentPropsWithoutRef, useEffect, useState } from 'react'
+import { ComponentPropsWithoutRef, useState } from 'react'
 import ReactLoading from 'react-loading';
 import { useInterval } from "usehooks-ts"
-
+import { Box, colors, Typography } from "@mui/material"
+import SmartToyIcon from '@mui/icons-material/SmartToy';
+import Person4Icon from '@mui/icons-material/Person4';
 type propTypes = ComponentPropsWithoutRef<"header"> & { text: string, sender: "bot" | "user", loading: boolean }
 
 const Message = (props: propTypes) => {
@@ -15,34 +17,38 @@ const Message = (props: propTypes) => {
         setRenderedText(text => text + props.text[cursor])
         setCursor(cursor => cursor + 1)
     }, cursor >= props.text.length || props.loading || props.sender !== "bot" ? null : 40)
-
     return (
-        <article className='flex items-start gap-x-4 p-2 rounded-md'>
-            <img
-                width={32} height={32}
-                src={props.sender === "bot" ? "/assets/bot.png" : "/assets/user.png"}
-            />
-            <div
-                className={" rounded-sm flex-1 "}>
+        <Box sx={{ display: "flex", alignItems: "start", columnGap: 1 }}>
+            <Box sx={{ position: "relative", top: 1, color: props.sender === "bot" ? colors.grey['700'] : colors.blue['800'] }}>
+                {props.sender === "bot" ? <SmartToyIcon fontSize='large' /> : <Person4Icon fontSize='large' />}
+            </Box>
+            <Box flex={1}>
                 {props.loading ?
-                    <div className='relative'>
+                    <Box className='relative'>
                         <ReactLoading
                             type={"bubbles"}
-                            color={"#94a3b8"}
+                            color={colors.grey['300']}
                             height={32}
                             className="self-center relative -top-3"
                         />
-                    </div> :
-                    <p style={{ whiteSpace: 'pre-line' }}
-                        className={`
-                    py-1 px-2  rounded-md ${props.sender === "bot" ? "bg-slate-700" : "bg-blue-700"} `
-                        }
+                    </Box> :
+                    <Typography
+                        variant='body2'
+                        sx={{
+                            whiteSpace: 'pre-line',
+                            color: props.sender === "bot" ? colors.grey['800'] : colors.grey['300'],
+                            bgcolor: props.sender === "bot" ?
+                                colors.grey['300'] : colors.blue['600'],
+                            borderRadius: 1,
+                            paddingInline: 2,
+                            paddingBlock: 1
+                        }}
                     >
                         {props.sender === "bot" ? renderedText : props.text}
-                    </p>
+                    </Typography>
                 }
-            </div>
-        </article >
+            </Box>
+        </Box>
     )
 }
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import Message from './Message'
-import { Paper } from '@mui/material'
+import { Box, Paper, colors } from '@mui/material'
 
 interface IMessage {
     id: string
@@ -25,11 +25,8 @@ const ChatSection = ({ messages }: IProps) => {
         }
     }, [messages])
     return (
-        <Paper elevation={2}>
-            <div
-                ref={chatSectionRef}
-                className="min-h-[200px] p-4 text-white flex-1  flex flex-col gap-y-2 "
-            >
+        <Paper elevation={2} sx={{ width: "min(90vw, 960px)", height: "100%", margin: "0.5em auto" }}>
+            <Box ref={chatSectionRef} m={2}>
                 {messages.map(message => (
                     <Message
                         key={message.id}
@@ -38,8 +35,7 @@ const ChatSection = ({ messages }: IProps) => {
                         loading={message.loading}
                     />
                 ))}
-            </div>
-
+            </Box>
         </Paper>
     )
 }
