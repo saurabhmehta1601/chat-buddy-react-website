@@ -14,9 +14,10 @@
 
 body {
   font-family: "Rubik", sans-serif;
-  background-image: url(../public/assets/background.png);
   background-size: cover;
   background-position: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Reference : https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp */

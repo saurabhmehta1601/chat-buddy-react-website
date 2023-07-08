@@ -4,6 +4,8 @@ import Header from "./components/Header"
 import PromptSubmitForm from "./components/PromptSubmitForm"
 import axios from "axios"
 import uuid from "react-uuid"
+import Box  from "@mui/material/Box"
+import colors  from "@mui/material/colors"
 
 interface IMessage {
   id: string
@@ -49,18 +51,15 @@ function App() {
 
   }
   return (
-    <div className="h-screen max-w-3xl mx-auto flex flex-col ">
+    <Box sx={{ height: "100vh", bgcolor:colors.grey['900']}}>
       <Header />
-      <ChatSection
-
-        messages={messages} />
+      <ChatSection messages={messages} /> 
       <PromptSubmitForm
         prompt={prompt}
         setPrompt={setPrompt}
         onSubmit={handlePromptSubmission}
       />
-    </div>
-
+    </Box>
   )
 }
 
