@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import ChatSection from "./components/ChatSection"
 import Header from "./components/Header"
 import PromptSubmitForm from "./components/PromptSubmitForm"
 import axios from "axios"
 import uuid from "react-uuid"
-import { Box, Paper, colors } from "@mui/material"
+import { Box, colors } from "@mui/material"
 
 interface IMessage {
   id: string
@@ -20,8 +20,7 @@ function App() {
     { id: "1", sender: "bot", text: "Hi how can I help you ? ", loading: false },
   ])
 
-  const handlePromptSubmission = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handlePromptSubmission = async () => {
     if (prompt.trim() === "") return
 
     try {
