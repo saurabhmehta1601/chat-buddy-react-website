@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import Message from './Message'
-import { Box, Paper, colors } from '@mui/material'
+import { Box, Paper } from '@mui/material'
 
 interface IMessage {
     id: string
@@ -25,8 +25,8 @@ const ChatSection = ({ messages }: IProps) => {
         }
     }, [messages])
     return (
-        <Paper elevation={2} sx={{ width: "min(90vw, 960px)", height: "100%", margin: "0.5em auto" }}>
-            <Box ref={chatSectionRef} m={2}>
+        <Paper elevation={2} sx={{ width: "min(90vw, 960px)", height: "100%", margin: "0.5em auto", overflowY: "scroll" }}>
+            <Box ref={chatSectionRef} m={2} display={"flex"} flexDirection={"column"} rowGap={2} height={"100%"} >
                 {messages.map(message => (
                     <Message
                         key={message.id}

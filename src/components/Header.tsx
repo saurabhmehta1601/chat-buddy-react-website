@@ -4,7 +4,7 @@ import { colors, IconButton, Typography, Link, Box } from '@mui/material';
 
 const Header = (props: ComponentPropsWithoutRef<"header">) => {
     return (
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", p: 2 }} {...props}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: 2, py: 1 }} {...props}>
             <Typography variant="h5">AI BUDDY</Typography>
             <Link target="_blank" href="https://github.com/saurabhmehta1601/OPENAI-GPT3-CHAT-BOT">
                 <IconButton sx={{ color: colors.grey['100'] }}>
